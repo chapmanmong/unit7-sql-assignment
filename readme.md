@@ -55,3 +55,27 @@ Assuming that these are fraudulent transactions then it makes sense that crimina
 The following SQL query was used to find the top 5 merchants with the most small transactions
 `SELECT id_merchant, count(*) FROM transaction where amount < 2 GROUP BY id_merchant ORDER BY count(*) DESC LIMIT 5;`
 
+##### View for small transactions:
+```
+CREATE VIEW small_transactions AS
+SELECT card, count(*) 
+FROM transaction 
+WHERE amount < 2 
+GROUP BY card 
+ORDER BY count(*) 
+DESC LIMIT 10;
+
+SELECT * FROM small_transactions;
+```
+
+##### View for transactions during suspicious hours:
+```
+CREATE VIEW suspicious_hours AS
+SELECT * FROM transaction 
+WHERE extract(hour from date) 
+BETWEEN 7 and 9 
+ORDER BY amount 
+DESC LIMIT 100;
+
+SELECT * FROM suspicious_hours;
+```
