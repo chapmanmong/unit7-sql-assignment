@@ -3,6 +3,7 @@
 
 ## Data Modeling
 The entity relationship diagram (ERD) is shown below and can also be found in the "ERD_model.png" file and was created using Quick Database Diagrams.
+The queries used can be found in [queries.sql](queries.sql)
 
 ![ERD model](ERD_model.png)
 
@@ -13,7 +14,7 @@ The number of tables and the fields they contain were dictated by the provided C
 The schema used to create the database can be found in the [schema.sql](schema.sql) file based on the ERD model shown previously.
 The data from the csv files were imported using pgadmin to create the database.
 
-## Data Analysis
+## Data Analysis Part 1
 ### Transactions less than $2 
 
 ##### How can you isolate (or group) the transactions of each cardholder?
@@ -79,3 +80,34 @@ DESC LIMIT 100;
 
 SELECT * FROM suspicious_hours;
 ```
+
+
+## Data Analysis Part 2
+Refer to [Visual data notebook file](visual_data_analysis.ipynb) for the code.
+
+##### What difference do you observe between the consumption patterns? Does the difference suggest a fraudulent transaction? Explain your rationale.
+
+Cardholder 2 makes frequent small purchases (less than $20) and has never used it the buy anything over $20
+Cardholder 18 spends in a similar way to Cardholder 2 in that he/she spends mostly on purchases under $20. The difference is in the large purchases made by Cardholder 18 where huge spikes can be seen on the graph indicating purchases that were magnitudes higher than the usual transaction.
+
+##### Are there any outliers for cardholder ID 25? How many outliers are there per month?
+Yes, according to the box plot, these are the number of outliers for each month:
+Jan: 1
+Feb: 0
+Mar: 1
+Apr: 3
+May: 1
+Jun: 3
+
+##### Do you notice any anomalies? Describe your observations and conclusions.
+It seems like there were a few out-lying almost monthly transactions over a $1000 which can be normal since there are recurring costs to running a business.
+I doubt an expensive restaurant bill will cost over a thousand dollars.
+However there were two three figure transactions in April that may link to the expensive restaurant bills. 
+
+
+
+
+
+
+
+
